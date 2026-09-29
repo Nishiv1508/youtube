@@ -29,7 +29,7 @@ const processQueue = (error: AxiosError | null, token: string = "") => {
 };
 
 api.interceptors.request.use((config) => {
-  const token = localStorage.getItem("access_token");
+  const token = localStorage.getItem("accessToken");
   if (token) {
     config.headers.set("Authorization", `Bearer ${token}`);
   }
@@ -63,7 +63,7 @@ api.interceptors.response.use(
           refreshToken: localStorage.getItem("refreshToken"),
         });
 
-        const newToken = data.data.accessToken;
+        const newToken = data.data.data.accessToken;
         localStorage.setItem("accessToken", newToken);
         api.defaults.headers.common["Authorization"] = `Bearer ${newToken}`;
 
