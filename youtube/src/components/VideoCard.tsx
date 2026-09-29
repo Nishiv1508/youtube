@@ -10,7 +10,7 @@ import {
   CardTitle,
 } from "./ui/card"
 
-export default function VideoCard({data}: {data: videoInterface}) {
+export default function VideoCard({data, handleClick}: {data: videoInterface, handleClick: (id: string) => void}) {
     const imageURL = import.meta.env.VITE_ASSET_BASEURL + data.thumbnailKey
   return (
     <Card className="relative mx-auto w-full max-w-sm pt-0">
@@ -30,7 +30,7 @@ export default function VideoCard({data}: {data: videoInterface}) {
         </CardDescription>
       </CardHeader>
       <CardFooter>
-        <Button className="w-full">Watch</Button>
+        <Button className="w-full" onClick={()=>handleClick(data.id)} >Watch</Button>
       </CardFooter>
     </Card>
   )
