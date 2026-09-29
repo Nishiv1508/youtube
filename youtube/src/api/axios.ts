@@ -1,5 +1,5 @@
 import axios from "axios";
-import type { AxiosInstance } from "axios";
+import { AxiosError, type AxiosInstance } from "axios";
 
 export const api: AxiosInstance = axios.create({
   baseURL: "https://yt-assesment.onrender.com/api/v1",
@@ -9,10 +9,15 @@ export const api: AxiosInstance = axios.create({
   }
 });
 
-let isRefreshing = false;
-let failedQueue = [];
+interface FailedRequest {
+  resolve: (token: string) => void;
+  reject: (error: AxiosError) => void;
+}
 
-const processQueue = (error, token = null) => {
+let isRefreshing = false;
+let failedQueue: FailedRequest[] = [];
+
+const processQueue = (error: AxiosError | null, token: string = "") => {
   failedQueue.forEach((prom) => {
     if (error) {
       prom.reject(error);
@@ -65,7 +70,7 @@ api.interceptors.response.use(
         processQueue(null, newToken);
         return api(originalRequest);
       } catch (refreshError) {
-        processQueue(refreshError, null);
+        processQueue(refreshError as AxiosError);  // ,null
         // Redirect to login or emit an event
         localStorage.removeItem("accessToken");
         window.location.href = "/";

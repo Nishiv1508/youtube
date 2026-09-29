@@ -11,9 +11,9 @@ export default function useLogin(){
             return res;
         },
         onSuccess: (res)=>{
-            console.log(res)
             localStorage.setItem("accessToken", res.data.data.accessToken)
             localStorage.setItem("refreshToken", res.data.data.refreshToken)
+            localStorage.setItem("isAuthenticated", JSON.stringify(true))
             navigate("/homepage");
         }
     })
