@@ -23,7 +23,7 @@ export default function HomePage() {
     }
 
     const handleClick = (id: string)=>{
-        navigate(`video/${id}`);
+        navigate(`/video/${id}`);
     }
 
     return (<>
