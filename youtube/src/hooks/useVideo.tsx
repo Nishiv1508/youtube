@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { getVideos } from "../api/video";
 
 export default function useVideo(page: number){
@@ -7,7 +7,8 @@ export default function useVideo(page: number){
         queryFn: async()=>{
             const res = getVideos(page);
             return res;
-        }
+        },
+        placeholderData: keepPreviousData
     })
 
     return query;
