@@ -15,5 +15,6 @@ export interface videoInterface{
         name: string;
         channelName: string;
         avatarKey: string | null;
-    }
+    };
+    myReaction?: string
 }
