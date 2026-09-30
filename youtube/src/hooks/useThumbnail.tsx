@@ -1,0 +1,30 @@
+import { useMutation } from "@tanstack/react-query";
+import type { Thumbnail } from "../interfaces/thumbnail";
+import { s3Thumbnail } from "../api/s3";
+import axios from "axios";
+
+type UploadPayload = Thumbnail & {
+  file: File;
+};
+
+export default function useThumbnail() {
+  return useMutation({
+    mutationFn: async ({ file, ...thumbnail }: UploadPayload) => {
+      const res = await s3Thumbnail(thumbnail);
+      const url = res.data.data.url;
+      const key = res.data.data.key;
+      const response = await axios.put(url, file, {
+        headers: {
+          "Content-Type": file.type,
+        },
+      });
+
+      return {response, key};
+    },
+
+    onSuccess: () => {
+      alert("Image Uploaded");
+    },
+
+  });
+}

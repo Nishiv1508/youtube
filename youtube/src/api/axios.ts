@@ -65,6 +65,7 @@ api.interceptors.response.use(
 
         const newToken = data.data.accessToken;
         localStorage.setItem("accessToken", newToken);
+        localStorage.setItem("refreshToken", data.data.refreshToken)
         api.defaults.headers.common["Authorization"] = `Bearer ${newToken}`;
 
         processQueue(null, newToken);
@@ -73,6 +74,7 @@ api.interceptors.response.use(
         processQueue(refreshError as AxiosError);  // ,null
         // Redirect to login or emit an event
         localStorage.removeItem("accessToken");
+        localStorage.setItem("isAuthenticated", "false");
         window.location.href = "/";
         return Promise.reject(refreshError);
       } finally {

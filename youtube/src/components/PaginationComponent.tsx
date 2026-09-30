@@ -7,7 +7,7 @@ import {
 } from "./ui/pagination"
 
 
-export function PaginationComponent({decrease, increase}: {decrease: ()=>void, increase: ()=>void}) {
+export function PaginationComponent({decrease, increase, count}: {decrease: ()=>void, increase: ()=>void, count: number}) {
 
   return (
     <div className="flex items-center justify-center mt-3">
@@ -16,6 +16,7 @@ export function PaginationComponent({decrease, increase}: {decrease: ()=>void, i
           <PaginationItem>
             <PaginationPrevious onClick={decrease} />
           </PaginationItem>
+          {count}
           <PaginationItem>
             <PaginationNext onClick={increase} />
           </PaginationItem>
