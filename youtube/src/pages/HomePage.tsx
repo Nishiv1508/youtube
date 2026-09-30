@@ -38,7 +38,7 @@ export default function HomePage() {
     </div>
 
     <div>
-        <PaginationComponent decrease={handleDecrease} increase={handleIncrease} />
+        <PaginationComponent decrease={handleDecrease} increase={handleIncrease} count={count} />
     </div>
     </>)
 }

@@ -10,7 +10,7 @@ export default function VideoPannel({videoData, handleClick}: {videoData: UseQue
         <div className="flex flex-wrap gap-7 mt-4">
             {isLoading? (<p>Loading</p>) : (
                 data?.data.data.map((video: videoInterface)=>{
-                    return <VideoCard data={video} handleClick={handleClick} />
+                    return <VideoCard key={video.id} data={video} handleClick={handleClick} />
                 })
             )}
         </div>
