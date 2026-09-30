@@ -12,11 +12,9 @@ import {
   MediaMuteButton,
   MediaFullscreenButton,
 } from "media-chrome/react";
-import { useEffect, useRef } from "react";
 
 export default function VideoPlayer({videoKey, miniplayer}: {videoKey: string, miniplayer: boolean}) {
     const videoURL = import.meta.env.VITE_ASSET_BASEURL + videoKey;
-    const videoRef = useRef(null);
 
   return (
     <MediaController
