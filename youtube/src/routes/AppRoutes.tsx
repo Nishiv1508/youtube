@@ -5,6 +5,7 @@ import ProtectedRoute from "../components/protected/ProtectRote";
 import AppLayout from "../components/protected/AppLayout";
 import VideoPage from "../pages/VideoPage";
 import UploadVideo from "../pages/UploadVideo";
+import ProfilePage from "../pages/ProfilePage";
 
 export default function AppRoutes(){
     return (
@@ -16,6 +17,7 @@ export default function AppRoutes(){
                     <Route path="/homepage" index element={<HomePage />} />
                     <Route path="/video/:id" element={<VideoPage />} />
                     <Route path="/upload" element={<UploadVideo />} />
+                    <Route path="/profile" element={<ProfilePage />} />
                 </Route>
             </Route>
         </Routes>
