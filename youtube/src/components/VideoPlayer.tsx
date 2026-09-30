@@ -12,9 +12,12 @@ import {
   MediaMuteButton,
   MediaFullscreenButton,
 } from "media-chrome/react";
+import { useEffect, useRef } from "react";
 
-export default function VideoPlayer({videoKey}: {videoKey: string}) {
+export default function VideoPlayer({videoKey, miniplayer}: {videoKey: string, miniplayer: boolean}) {
     const videoURL = import.meta.env.VITE_ASSET_BASEURL + videoKey;
+    const videoRef = useRef(null);
+
   return (
     <MediaController
       style={{
@@ -27,7 +30,7 @@ export default function VideoPlayer({videoKey}: {videoKey: string}) {
         slot="media"
         src={videoURL}
         controls={false}
-        pip={true}
+        pip={miniplayer}
         style={{
           width: "100%",
           height: "100%",
