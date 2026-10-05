@@ -1,4 +1,3 @@
-import type { uploadForm } from "../interfaces/uploadForm";
 import type { PartResponse, UploadResponse } from "../interfaces/UploadResponse";
 import { api } from "./axios";
 
