@@ -49,7 +49,7 @@ export function ProfileCard({data}: {data: Profile}) {
       <AccordionItem value="role">
         <AccordionTrigger>Role</AccordionTrigger>
         <AccordionContent>
-          {data.role}
+          {data.role.toLocaleLowerCase()}
         </AccordionContent>
       </AccordionItem>
       <AccordionItem value="channelName">
@@ -62,12 +62,6 @@ export function ProfileCard({data}: {data: Profile}) {
         <AccordionTrigger>Created Date</AccordionTrigger>
         <AccordionContent>
           {data.createdAt.slice(0, 10)}
-        </AccordionContent>
-      </AccordionItem>
-      <AccordionItem value="id">
-        <AccordionTrigger>ID</AccordionTrigger>
-        <AccordionContent>
-          {data.id}
         </AccordionContent>
       </AccordionItem>
     </Accordion>

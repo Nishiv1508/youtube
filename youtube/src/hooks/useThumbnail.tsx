@@ -7,12 +7,12 @@ type UploadPayload = Thumbnail & {
   file: File;
 };
 
-export default function useThumbnail() {
+export default function useThumbnail(setImageURL: React.Dispatch<React.SetStateAction<string>>) {
   return useMutation({
     mutationFn: async ({ file, ...thumbnail }: UploadPayload) => {
       const res = await s3Thumbnail(thumbnail);
-      const url = res.data.data.url;
-      const key = res.data.data.key;
+      const url: string = res.data.data.url;
+      const key: string = res.data.data.key;
       const response = await axios.put(url, file, {
         headers: {
           "Content-Type": file.type,
@@ -22,9 +22,14 @@ export default function useThumbnail() {
       return {response, key};
     },
 
-    onSuccess: () => {
+    onSuccess: (data) => {
+      setImageURL(data.key);
       alert("Image Uploaded");
     },
+
+    onError: ()=>{
+      alert("Failed Uploading Image")
+    }
 
   });
 }

@@ -10,35 +10,37 @@ export default function HomePage() {
     const { data, isLoading } = useVideo(count);
     const navigate = useNavigate();
 
-    const handleIncrease = ()=>{
-        if(count<4){
-            setCount((c)=>c+1);
+    const handleIncrease = () => {
+        if (count < 4) {
+            setCount((c) => c + 1);
         }
     }
 
-    const handleDecrease = ()=>{
-        if(count>1){
-            setCount((c)=>c-1);
+    const handleDecrease = () => {
+        if (count > 1) {
+            setCount((c) => c - 1);
         }
     }
 
-    const handleClick = (id: string)=>{
+    const handleClick = (id: string) => {
         navigate(`/video/${id}`);
     }
 
-    return (<>
-    <div className="flex flex-wrap gap-x-2 gap-y-6">
-        {isLoading ? (<p>Loading...</p>) : (
+    return (
+        <>
+            {isLoading ? <p>Loading...</p> : (
+                <>
+                    <div className="flex flex-wrap gap-x-2 gap-y-6">
 
-            data &&
-            data.data.data.map((vd: videoInterface) => {
-                return <VideoCard key={vd.id} data={vd} handleClick={handleClick} />
-            })
-        )}
-    </div>
+                        {data &&
+                            data.data.data.map((vd: videoInterface) => {
+                                return <VideoCard key={vd.id} data={vd} handleClick={handleClick} />
+                            })}
+                    </div>
+                    <PaginationComponent decrease={handleDecrease} increase={handleIncrease} count={count} />
+                </>
 
-    <div>
-        <PaginationComponent decrease={handleDecrease} increase={handleIncrease} count={count} />
-    </div>
-    </>)
+            )}
+        </>
+    )
 }
